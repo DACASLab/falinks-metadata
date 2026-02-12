@@ -18,7 +18,37 @@ To change the hostname from dexter to falinks0x follow the following steps, wher
   4. Restart the system to apply changes completely: `sudo reboot`
 
 ## Username change
+Since we don't want anything to do with dexter name, changing the username from dexter to falinks, by creating a new falinks user, and adding it to the same groups as the dexter user. NOTE: check if any other permissions are to be given to the falinks user. 
+
+The steps are as follows:
+  1. Create a new user: `sudo adduser falinks`
+  2. Add the new user to the same groups as dexter: `sudo usermod -aG sudo,adm,dialout,cdrom,floppy,plugdev,lpadmin,sambashare`
+  3. Reboot, `sudo reboot`
+  4. Login with the `falinks` user and setup the autologin procedure. 
+  5. Goto `/etc/gdm3/custom.conf` and change the line `AutomaticLoginEnable = true` to `AutomaticLoginEnable = true` and `AutomaticLogin = falinks`.
+  6. Reboot again to apply the changes: `sudo reboot`
 
 ## Install `jtop`
 
-If jtop says that jetpack is missing. Installing via `sudo apt install nvidia-jetpack`.
+If jtop says that jetpack is missing. Installing via `sudo apt install nvidia-jetpack`. NOTE: OpenCV is not showing CUDA compilation. check if that is the case or not. If not install OpenCV with CUDA support and see if jtop can detect it. 
+
+## Install Docker
+
+1. Install Docker only via the convienence script. any other way installs the ugly version of docker aka the Docker Desktop.
+The commands are :
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+```
+
+2. Follow the post install steps to make sure that docker works on non-root user. Although this is not needed, its good to use docker without sudo. The post innstall scripts are provided here for convienence. This will enable the docker service to start on boot as well.
+
+```
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+docker run hello-world
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
+
