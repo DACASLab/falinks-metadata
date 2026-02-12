@@ -16,3 +16,9 @@ To change the hostname from dexter to falinks0x follow the following steps, wher
   2. `sudo vim /etc/hosts` and replace the old hostname with the new one in the line starting with `127.0.1.1`.
   3. Verify the change: `hostnamectl`
   4. Restart the system to apply changes completely: `sudo reboot`
+
+## Username change
+
+## Install `jtop`
+
+If jtop says that jetpack is missing. Installing via `sudo apt install nvidia-jetpack`.
